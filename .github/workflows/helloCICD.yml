@@ -27,8 +27,14 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a multi-line command using the runners shell
-      - name: Run our custom script
+      - name: Ionic Build
         run: |
           cd cicd_app
           npm install
           ionic build --release
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: build
+          path: cicd_app/www
