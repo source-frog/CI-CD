@@ -1,0 +1,20 @@
+name: Docker Hub Sync
+on:
+  push:
+    paths:
+      - docs/docker.md
+      - .github/workflows/dockerhub-description.yml
+# Jobs
+jobs:
+  docker-sync:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@master
+
+      - uses: meeDamian/sync-readme@v1.0.6
+        with:
+          user: ${{ secrets.DOCKER_USERNAME }}
+          pass: ${{ secrets.DOCKER_PASSWORD }}
+          readme: ./docs/docker.md
+          description: true
+          slug: sourcefrog/cicd
