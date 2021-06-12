@@ -53,3 +53,23 @@ jobs:
           name: sourcefrog/cicd
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+  deploy-private:
+    name: Treescale Deployment
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: build
+
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          registry: repo.treescale.com
+          name: strobsi/cicd
+          username: ${{ secrets.TREESCALE_USERNAME }}
+          password: ${{ secrets.TREESCALE_AUTH_TOKEN }}
