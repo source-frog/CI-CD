@@ -19,10 +19,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Use coturiv/setup-ionic
-        uses: coturiv/setup-ionic@v1
-        with:
-          cordova-version: 8
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
@@ -31,7 +27,7 @@ jobs:
         run: |
           cd cicd_app
           npm install
-          ionic build --release
+          npm run build
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v1
