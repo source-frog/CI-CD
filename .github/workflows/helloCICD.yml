@@ -39,7 +39,7 @@ jobs:
           name: build
           path: cicd_app/www
 
-  deploy:
+  deploy-public:
     name: DockerHub Deployment
     needs: build
     runs-on: ubuntu-latest
